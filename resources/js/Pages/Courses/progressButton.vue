@@ -21,6 +21,7 @@
               episode : this.episodeId
           }).then(response => { if (response.status == 200){
               this.isWatched = !this.isWatched
+              eventBus.$emit('progressBar', response.data);
           }
           });
       },

@@ -4,21 +4,39 @@ namespace App\Models;
 
 use App\Models\User;
 use App\Models\Episode;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Course extends Model
 {
     use HasFactory;
+    use Authorizable;
 
-        /**
-     * The accessors to append to the model's array form.
+    protected static function booted()
+    {
+        static::creating(function ($course){
+            $course->user_id = Auth::user()->id;
+        });
+    }
+
+    protected $appends = ['update', 'human_created_at'];
+
+    /**
+     * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $appends = [
-        'human_created_at',
+    protected $fillable = [
+        'title',
+        'description',
     ];
+
+    public function getUpdateAttribute(){
+        return $this->can('update-cours', $this);
+    }
 
     /**
      * Retourne les épisodes de la formation

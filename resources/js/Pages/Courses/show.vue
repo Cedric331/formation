@@ -6,7 +6,6 @@
             </h2>
         </template>
 
-
             <section class="text-gray-600 body-font overflow-hidden">
                 <div class="container px-5 py-5 mx-auto">
                     <div class="-my-4 divide-y-2 divide-gray-100 p-5">
@@ -24,6 +23,9 @@
                 </div>
             </section>
 
+        <div class="container my-4 mx-auto">
+            <progress-bar :listEp="listEpisodes" :watchedEp="watch"/>
+        </div>
             <hr class="mx-8">
 
         <div v-for="(episode, index) in listEpisodes" :key="episode.id">
@@ -51,6 +53,7 @@
 <script>
     import AppLayout from '@/Layouts/AppLayout'
     import ProgressButton from '@/Pages/Courses/progressButton'
+    import ProgressBar from '@/Pages/Courses/progressBar'
 
     export default {
         data() {
@@ -63,6 +66,7 @@
         components: {
             AppLayout,
             ProgressButton,
+            ProgressBar,
         },
 
           methods: {

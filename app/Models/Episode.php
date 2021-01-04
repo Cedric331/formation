@@ -11,6 +11,19 @@ class Episode extends Model
 {
     use HasFactory;
 
+            /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'title',
+        'description',
+        'video_url',
+        'course_id',
+        'duration'
+    ];
+
     /**
      * Retourne la formation de l'épisode
      *
